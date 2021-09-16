@@ -15,13 +15,10 @@ import javax.sql.DataSource;
 @Configuration
 //@ConfigurationProperties(prefix = "spring.datasource")
 public class JavaConfig {
-
-
-    @Primary
     @Bean
     @ConfigurationProperties(prefix="spring.datasource")
     public DataSource userDataSource() {
-        return DataSourceBuilder.create().build();
+        return new HikariDataSource();
     }
 
 //    @Bean
