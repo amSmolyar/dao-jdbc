@@ -7,6 +7,7 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 import javax.sql.DataSource;
 import java.io.BufferedReader;
@@ -22,6 +23,12 @@ public class Repository {
 
     @Autowired
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+//    private DriverManagerDataSource dataSource;
+
+//    @Autowired
+//    public void setDataSource(DriverManagerDataSource dataSource) {
+//        this.dataSource = dataSource;
+//    }
 //    private DataSource dataSource;
 
 //    public void setDataSource(DataSource dataSource) {
@@ -36,6 +43,7 @@ public class Repository {
 
     public Repository () {
         this.sqlScript = read("myScript.sql");
+//        this.namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
     }
 
     private static String read(String scriptFileName) {
