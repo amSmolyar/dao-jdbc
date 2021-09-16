@@ -4,12 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
-import javax.sql.DataSource;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -23,27 +20,9 @@ public class Repository {
 
     @Autowired
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
-//    private DriverManagerDataSource dataSource;
-
-//    @Autowired
-//    public void setDataSource(DriverManagerDataSource dataSource) {
-//        this.dataSource = dataSource;
-//    }
-//    private DataSource dataSource;
-
-//    public void setDataSource(DataSource dataSource) {
-//        this.namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
-//    }
-
-//    public Repository (DataSource dataSource) {
-//        this.dataSource = dataSource;
-//        this.sqlScript = read("myScript.sql");
-//        setDataSource(dataSource);
-//    }
 
     public Repository () {
         this.sqlScript = read("myScript.sql");
-//        this.namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
     }
 
     private static String read(String scriptFileName) {
@@ -57,10 +36,10 @@ public class Repository {
 
     public List<String> getProductName(String name) {
 
-        List<String> productList = namedParameterJdbcTemplate.query(
+        List<String> productList = namedParameterJdbcTemplate.queryForList(
                 sqlScript,
                 new MapSqlParameterSource("name", name),
-                new BeanPropertyRowMapper<>(String.class));
+                String.class);
 
         return productList;
     }
