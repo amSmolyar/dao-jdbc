@@ -1,0 +1,76 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+            http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd
+            http://www.liquibase.org/xml/ns/dbchangelog
+            http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.3.xsd">
+
+    <changeSet id="5" author="amSmolyar">
+        <createTable tableName="orders">
+            <column name="id" type="bigint(20)" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="date" type="datetime" defaultValueDate="NOW()">
+                <constraints nullable="false"/>
+            </column>
+            <column name="customer_id" type="int(10000)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="product_name" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="amount" type="int(1000)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="6" author="amSmolyar">
+        <addForeignKeyConstraint baseTableName="orders" baseColumnNames="customer_id"
+                                 constraintName="newid"
+                                 referencedTableName="customers" referencedColumnNames="id"/>
+    </changeSet>
+
+    <changeSet id="7" author="amSmolyar">
+        <sql>
+            insert into orders (customer_id, product_name, amount) values (1, 'bread', 2)
+        </sql>
+    </changeSet>
+
+    <changeSet id="8" author="amSmolyar">
+        <sql>
+            insert into orders (customer_id, product_name, amount) values (2, 'eggs', 3);
+        </sql>
+    </changeSet>
+
+    <changeSet id="9" author="amSmolyar">
+        <sql>
+            insert into orders (customer_id, product_name, amount) values (3, 'milk', 2);
+        </sql>
+    </changeSet>
+
+    <changeSet id="10" author="amSmolyar">
+        <sql>
+            insert into orders (customer_id, product_name, amount) values (1, 'socks-42', 3);
+        </sql>
+    </changeSet>
+
+    <changeSet id="11" author="amSmolyar">
+        <sql>
+            insert into orders (customer_id, product_name, amount) values (1, 'champagne', 1);
+        </sql>
+    </changeSet>
+
+    <changeSet id="12" author="amSmolyar">
+        <sql>
+            insert into orders (customer_id, product_name, amount) values (2, 'champagne', 1);
+        </sql>
+    </changeSet>
+
+    <changeSet id="13" author="amSmolyar">
+        <sql>
+            insert into orders (customer_id, product_name, amount) values (3, 'champagne', 1);
+        </sql>
+    </changeSet>
+</databaseChangeLog>

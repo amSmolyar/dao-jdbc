@@ -1,4 +1,7 @@
 databaseChangeLog:
   - include:
-      file: schema.sql
+      file: src/main/resources/db/changelog/migrations/001-schema.xml
+      relativeToChangeLogFile: true
+  - include:
+      file: src/main/resources/db/changelog/migrations/002-schema.xml
       relativeToChangeLogFile: true

@@ -1,0 +1,56 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+            http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd
+            http://www.liquibase.org/xml/ns/dbchangelog
+            http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.3.xsd">
+
+    <changeSet id="1" author="amSmolyar">
+        <createTable tableName="customers">
+            <column name="id" type="bigint(20)" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="name" type="varchar(100)">
+                <constraints nullable="false" />
+            </column>
+            <column name="surname" type="varchar(100)">
+                <constraints nullable="false" />
+            </column>
+            <column name="age" type="int(127)">
+                <constraints nullable="false" />
+            </column>
+            <column name="phone_number" type="varchar(100)">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+    </changeSet>
+
+
+    <changeSet id="2" author="amSmolyar">
+        <insert tableName="customers">
+            <column name="name" value="Evgeniy"/>
+            <column name="surname" value="Smirnov"/>
+            <column name="age" value="31"/>
+            <column name="phone_number" value="+79258745344"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="3" author="amSmolyar">
+        <insert tableName="customers">
+            <column name="name" value="Pavel"/>
+            <column name="surname" value="Ivanov"/>
+            <column name="age" value="37"/>
+            <column name="phone_number" value="+79258745344"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="4" author="amSmolyar">
+        <insert tableName="customers">
+            <column name="name" value="Alexey"/>
+            <column name="surname" value="Bokov"/>
+            <column name="age" value="42"/>
+            <column name="phone_number" value="+79157837654"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>
