@@ -1,1 +1,1 @@
-select o from orders o inner join customers c on o.customer_id = c.id where c.name = :name
+select o.productName from Order o join o.customer c where c.name = :name

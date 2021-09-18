@@ -14,7 +14,7 @@ public class Service {
         this.repository = repository;
     }
 
-    public List<Order> getProductName(String name) {
+    public List<String> getProductName(String name) {
         return repository.getProductName(name);
     }
 

@@ -33,7 +33,7 @@ public class Repository {
     private EntityManager entityManager;
 
     public Repository () {
-        this.sqlScript = read("myScript.sql");
+
     }
 
     private static String read(String scriptFileName) {
@@ -45,14 +45,11 @@ public class Repository {
         }
     }
 
-    public List<Order> getProductName(String name) {
-        var query =  entityManager.createQuery(sqlScript, Order.class);
+    public List<String> getProductName(String name) {
+        sqlScript = read("myScript.sql");
+        var query =  entityManager.createQuery(sqlScript, String.class);
         query.setParameter("name", name);
         return query.getResultList();
-//        List<Order> orders = query.getResultList();
-//        return orders.stream()
-//                .map(Order::getProductName)
-//                .collect(Collectors.toList());
     }
 
     @Transactional
@@ -74,19 +71,19 @@ public class Repository {
                             .build();
 
                     this.entityManager.persist(customer);
+
+                    IntStream.range(0, 2)
+                            .forEach(j -> {
+                                var order = Order.builder()
+                                        .date(date)
+                                        .productName(products.get(random.nextInt(products.size())))
+                                        .amount(random.nextInt(4) + 1)
+                                        .customer(customer)
+                                        .build();
+
+                                this.entityManager.persist(order);
+                            });
                 });
 
-        IntStream.range(0, 10)
-                .forEach(i -> {
-                    var order = Order.builder()
-                            .date(date)
-                            .productName(products.get(random.nextInt(products.size())))
-                            .amount(random.nextInt(4) + 1)
-                            .customerId(random.nextInt(4) + 1)
-                            .build();
-
-                    this.entityManager.persist(order);
-                });
     }
-
 }

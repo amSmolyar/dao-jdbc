@@ -15,7 +15,8 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@Entity(name = "orders")
+@Entity
+@Table(name = "orders")
 public class Order implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,13 +33,16 @@ public class Order implements Serializable {
     @Min(1)
     private int amount;
 
-    @Column(name = "customer_id", nullable = false)
-    @Min(1)
-    private long customerId;
+//    @Column(name = "customer_id", nullable = false)
+//    @Min(1)
+//    private long customerId;
+//
+//    @ManyToOne(fetch = FetchType.EAGER)
+//    @JoinColumn(name="customer", referencedColumnName="id")
+//    private Customer customer;
 
-
-    @Transient
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="customer_id", referencedColumnName="id")
+    @JoinColumn(name="customer_id")
     private Customer customer;
+
 }
