@@ -7,6 +7,11 @@
             http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.3.xsd">
 
     <changeSet id="5" author="amSmolyar">
+        <preConditions onFail="WARN">
+            <not>
+                <tableExists tableName="orders"/>
+            </not>
+        </preConditions>
         <createTable tableName="orders">
             <column name="id" type="bigint(20)" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
@@ -14,7 +19,7 @@
             <column name="date" type="datetime" defaultValueDate="NOW()">
                 <constraints nullable="false"/>
             </column>
-            <column name="customer_id" type="int(10000)">
+            <column name="customer_id" type="bigint(20)">
                 <constraints nullable="false"/>
             </column>
             <column name="product_name" type="varchar(100)">
@@ -28,8 +33,8 @@
 
     <changeSet id="6" author="amSmolyar">
         <addForeignKeyConstraint baseTableName="orders" baseColumnNames="customer_id"
-                                 constraintName="newid"
-                                 referencedTableName="customers" referencedColumnNames="id"/>
+                                 referencedTableName="customers" referencedColumnNames="id"
+                                 constraintName="orders_customer_fk"/>
     </changeSet>
 
     <changeSet id="7" author="amSmolyar">
