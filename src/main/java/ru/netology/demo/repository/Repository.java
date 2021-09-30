@@ -1,13 +1,7 @@
 package ru.netology.demo.repository;
 
-import lombok.Data;
 import lombok.var;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import ru.netology.demo.dao.Customer;
 import ru.netology.demo.dao.Order;
 
@@ -25,16 +19,11 @@ import java.util.Random;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-@EnableAutoConfiguration(exclude={DataSourceAutoConfiguration.class})
+//@EnableAutoConfiguration(exclude={DataSourceAutoConfiguration.class})
 public class Repository {
-    private String sqlScript;
 
     @PersistenceContext
     private EntityManager entityManager;
-
-    public Repository () {
-
-    }
 
     private static String read(String scriptFileName) {
         try (InputStream is = new ClassPathResource(scriptFileName).getInputStream();
@@ -46,7 +35,7 @@ public class Repository {
     }
 
     public List<String> getProductName(String name) {
-        sqlScript = read("myScript.sql");
+        String sqlScript = read("myScript.sql");
         var query =  entityManager.createQuery(sqlScript, String.class);
         query.setParameter("name", name);
         return query.getResultList();

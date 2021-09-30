@@ -7,12 +7,6 @@ import ru.netology.demo.service.Service;
 
 @Configuration
 public class JavaConfig {
-//    @Bean
-//    @ConfigurationProperties(prefix="spring.datasource")
-//    public DataSource userDataSource() {
-//        return new HikariDataSource();
-//    }
-
     @Bean
     public Repository repository() {
         return new Repository();

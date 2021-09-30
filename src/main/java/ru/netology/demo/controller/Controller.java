@@ -1,10 +1,8 @@
 package ru.netology.demo.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import ru.netology.demo.dao.Order;
 import ru.netology.demo.service.Service;
 
 import java.util.List;
@@ -24,8 +22,8 @@ public class Controller {
     }
 
     @GetMapping("/products")
-    public void setTablesValues() {
-        service.setTablesValues();
+    public String setTablesValues() {
+        return service.setTablesValues();
     }
 
 }

@@ -1,14 +1,12 @@
 package ru.netology.demo.service;
-
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
-import ru.netology.demo.dao.Order;
 import ru.netology.demo.repository.Repository;
 
 import java.util.List;
 
 public class Service {
     private Repository repository;
+
+    private static int cntInitTableRequest = 0;
 
     public Service(Repository repository) {
         this.repository = repository;
@@ -18,7 +16,13 @@ public class Service {
         return repository.getProductName(name);
     }
 
-    public void setTablesValues() {
-        repository.setTablesValues();
+    public String setTablesValues() {
+        cntInitTableRequest++;
+        if (cntInitTableRequest > 1) {
+            return "Tables values have been already set";
+        } else {
+            repository.setTablesValues();
+            return "Tables values have been successfully set";
+        }
     }
 }
